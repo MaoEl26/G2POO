@@ -1,6 +1,12 @@
 package strategygame;
 
-public class Cell {
+import java.io.Serializable;
+
+/**
+ *
+ * @author Mauricio Castillo
+ */
+public class Cell implements Serializable{
     private boolean passable;
     private Unit army;
     
@@ -13,11 +19,6 @@ public class Cell {
         this.army = null;       // Puesto que todavía no hay nadie.       
     }
     
-    public boolean getPassable()
-    {
-        return this.passable;
-    }
-    
     // Para poder cambiar el valor.
     
     public void setPassable(boolean value)   
@@ -25,27 +26,42 @@ public class Cell {
         this.passable = value;
     }
     
-    public int getId(){
-        return this.army.getId();
-    }
-    
-    public char getArmy()
-    {
-        return this.army.getType();
-    }
-    
-    // Información de la celda, franqueabilidad y estado de la unidad.
-    
     public void setArmy(Unit army)
     {
         this.army = army;
     }
     
+    public boolean getPassable()
+    {
+        return this.passable;
+    }
+        
+    public int getId(){
+        return this.army.getId();
+    }
+    
+    public char getArmyType()
+    {
+        return this.army.getType();
+    }
+    
+    public Unit getArmy(){
+        return army;
+    }
+    
+    public String getArmyPlayer(){ // Retorna el jugador al que pertenece la unidad
+        return this.army.getPlayer();
+    }
+    
+    // Información de la celda, franqueabilidad y estado de la unidad.
+    
+
+    @Override
     public String toString()
     {
         String msj = "";
         msj = msj + "Franqueable: " + getPassable() + "\n";
-        msj = msj + "Unidad: " + getArmy() + "\n";
+        msj = msj + "Unidad: " + getArmyType() + "\n";
         
         if (this.passable == true)
         {
