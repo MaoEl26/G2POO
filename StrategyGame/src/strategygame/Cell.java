@@ -2,10 +2,6 @@ package strategygame;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Mauricio Castillo
- */
 public class Cell implements Serializable{
     
     private boolean passable;
