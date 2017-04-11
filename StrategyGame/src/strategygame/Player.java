@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner; 
 
 public class Player implements Serializable {
+    
     private int maxCost;
     private Unit[] army;
     private Field playField;
@@ -31,7 +32,7 @@ public class Player implements Serializable {
         this.maxCost = 15; // Por ejemplo: x2 lanceros, x1 caballeria, x1 arquero.
         this.army = new Unit[5];
         this.playField = pPlayfield;
-        this.scan = new Scanner(System.in);
+        //this.scan = new Scanner(System.in);
         this.maxCostAux = this.maxCost;
         
     }
@@ -135,7 +136,7 @@ public class Player implements Serializable {
                     "Id: " + this.army[y].getId());
             
             int pos;
-           
+            scan = new Scanner(System.in);
             do // Para poder verificar la entrada de los valores.
             {
                 pos = scan.nextInt();
@@ -382,7 +383,7 @@ public class Player implements Serializable {
                 System.out.print("Number of lancers(cost 3): ");
                 
                 // Input de los números.
-                
+                scan = new Scanner(System.in);
                 int lancers = scan.nextInt();
                 System.out.println("    Remaining points: " + calcularPuntaje("1", lancers) + "\n");
                 System.out.print("Number of cavalries(cost 5): ");
@@ -415,6 +416,9 @@ public class Player implements Serializable {
                
         // Se recorren las unidades.
         
+        
+        scan = new Scanner(System.in); 
+        
         for (int y = 0; y < this.lastUnit; y++)
         {
             if (this.army[y].getId() >= 0)
@@ -422,7 +426,7 @@ public class Player implements Serializable {
                 System.out.println("Unit: " + this.army[y].getName() + "(" +
                         this.army[y].getId() + ")");
                 System.out.print("Move? ");
-                String auxMove = scan.next();
+                String auxMove = scan.next();//Aqui marca el err
                 
                 if (auxMove.equals("y"))
                 {
