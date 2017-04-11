@@ -3,6 +3,7 @@ package strategygame;
 import java.io.Serializable;
 
 public class Field implements Serializable {
+    
     private int cols, rows;
     private Cell[][] playfield;
     
