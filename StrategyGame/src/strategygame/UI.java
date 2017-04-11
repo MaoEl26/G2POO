@@ -11,7 +11,6 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
 public final class UI implements Serializable{
-    //private static final long serialVersionUID = 6529685098267757690L;
     private Field Arena;
     private Player player1;
     private Player player2;
