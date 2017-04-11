@@ -1,11 +1,17 @@
 package strategygame;
 
-public class Field {
+import java.io.Serializable;
+
+public class Field implements Serializable {
     private int cols, rows;
     private Cell[][] playfield;
     
-    public Field(int pRows, int pCols)
-    {
+    /**
+     *
+     * @param pRows
+     * @param pCols
+     */
+    public Field(int pRows, int pCols){
         this.rows = pRows;
         this.cols = pCols;
         
@@ -42,12 +48,22 @@ public class Field {
         this.playfield[pRow][pCol].setPassable(passable);
     }
     
+    public Unit getUnitInCell(int pRow, int pCol){
+        return this.playfield[pRow][pCol].getArmy();
+    }
+    
+    // Retorna el jugador al que pertenece la unidad en una celda.
+    
+    public String getPlayerUnitInCell(int pRow, int pCol){ 
+        return this.playfield[pRow][pCol].getArmyPlayer();
+    }
+    
     public int getCols(){
-        return this.cols;
+        return cols;
     }
     
     public int getRows(){
-        return this.rows;
+        return rows;
     }
     
     // Verifica si la celda es franqueable.
@@ -55,43 +71,7 @@ public class Field {
     public boolean isPassable(int pRows, int pCols){ 
         return this.playfield[pRows][pCols].getPassable();
     }
-    
-    // Retorna la fila actual de la unidad.
-    
-    public int actualPosRow(Unit unidad){ 
-        int posX = 0;
-        for (int x = 0; x < this.rows; x++){
-            for (int y = 0; y < this.cols; y++){
-                if (this.playfield[x][y].getPassable() == true){
-                    if (this.playfield[x][y].getId() == unidad.getId()){
-                        posX = x;
-                        return posX;
-                        
-                    }
-                }
-            }
-        }
-        return 0;
-    }
-    
-    // Retorna la columna actual de la unidad.
-    
-    public int actualPosCol(Unit unidad){ 
-        int posY = 0;
-        for (int x = 0; x < this.rows; x++){
-            for (int y = 0; y < this.cols; y++){
-                if (this.playfield[x][y].getPassable() == true){
-                    if (this.playfield[x][y].getId() == unidad.getId()){
-                        posY = y;
-                        return posY;
-                    }
-                }
-            }
-        }
-       
-        return 0;
-    }
-    
+        
     public void verArena()    // Ver la arena.
     {
         // Números de arriba.
@@ -116,7 +96,7 @@ public class Field {
                 
                 if (this.playfield[x][y].getPassable() == true)
                 {
-                    System.out.print("  " + this.playfield[x][y].getArmy() + " ");
+                    System.out.print("  " + this.playfield[x][y].getArmyType() + " ");
                 }
                 else
                 {
@@ -126,5 +106,6 @@ public class Field {
             
             System.out.println("");
         }
+        System.out.printf("\n");
     }
 }
