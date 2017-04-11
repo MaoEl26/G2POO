@@ -1,60 +1,135 @@
 package strategygame;
 
-public class UI {
-    
-    public static void main(String[] args) {
-        
-        Field Arena = new Field(5, 5);
-        
-        Player player1 = new Player("P1", Arena);
-        // Player player2 = new Player("P2", Arena);
-        
-        System.out.println("Player 1 army:");
-        player1.createArmy(2, 1, 1);
-        player1.seeArmy();
-        
-        /*
-        System.out.println("Player 2 army:");
-        player2.createArmy(0, 1, 2);
-        player2.seeArmy();
-        */
-        
-// Jugador 1 ingresa sus primeras tropas en su lado de la arena
-        
-        player1.addFirstUnits(0, 0);
-        player1.addFirstUnits(1, 1);
-        player1.addFirstUnits(2, 2);
-        player1.addFirstUnits(3, 3);
+import java.io.File;
+import java.io.Serializable;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
-        // Jugador 2 ingresa sus primeras tropas en su lado de la arena
-        /*
-        player2.addFirstUnits(0, 0);
-        player2.addFirstUnits(1, 1);
-        player2.addFirstUnits(2, 2);
+public class UI implements Serializable{
+    private Field Arena;
+    private Player player1;
+    private Player player2;
+    private transient Scanner scanner;
+    public static UI juego;
+    
+    public UI() throws ClassNotFoundException{
+    System.out.println(""
+                + 
+"                  ۞ \n" +
+"              ╘╗_۩_╔╛ \n" +
+"                ]█▓[ \n" +
+"                ]█▓[ \n" +
+"                ]█▓[ \n" +
+"                ]█▓[ \n" +
+"                ]█▓[ \n" +
+"                ]█▓[ \n" +
+"     ╘╗______╔╝█▓╚╗______╔╛ \n" +
+"    ۞]▓▓▓║Strategy game║▓▓▓[۞ \n" +
+"     ┌╜‾‾‾‾‾‾ ╚╗░▒╔╝ ‾‾‾‾‾‾╙┐ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                ║░▒║ \n" +
+"                 ║▒  \n" +
+"                  ▼   \n"  + 
+"       Welcome to Strategy Game");
         
-        */
-        // player2.addFirstUnits(3, 3);
-        // player2.addFirstUnits(4, 3);
+        // Aquí debería de ir, las opciones de jugar.
+        // Ya sea reanudar una partida o iniciar otra.
+        
+        if (false){
+            cargarArchivos();
+        }else{
+        Arena = new Field(5, 5);
+        player1 = new Player("P1", Arena);
+        player2 = new Player("P2", Arena);
+        
+        // Momento donde se inician las tropas y 
+        // se escogen sus posiciones.
+        
+        System.out.println("\nSetup phase.");
+        System.out.println("Player 1: Choose your army:");
+        
+        player1.chooseArmy();
+        
+        System.out.println("Player 2: Choose your army:");
+        player2.chooseArmy();
+        
+        System.out.println("\n");
+        System.out.println("This will be the arena: ");
         Arena.verArena();
         
-        // Jugador 2 hace un movimiento
+        System.out.println("Player 1: choose your formation.");
+        System.out.println("You can only pick columns." + "\n");
+        player1.placeUnits();
         
-        player1.move(0, 1, 0);
-        player1.move(1, 1, 1);
-        // player2.move(0, 3, 2);
+        System.out.println("Player 2: choose your formation.");
+        System.out.println("You can only pick columns." + "\n");
+        player2.placeUnits();
         
-        Arena.verArena();
+        System.out.println("Let the battle begin!");
+        System.out.println("\\,,/ O.O \\,,/");
+        System.out.println("\n");
+        }
+    }       
+public void game(){
+        int answer;
+        while (player1.lose() == false || player2.lose() == false)
+        {   
+            System.out.print("Desea Guardar el progreso actual? (Y/N)");
+//            answer = scanner.nextInt();
+
+            if(true){
+                guardarArchivos();
+            }
+            player1.play();
+            System.out.println("Desea Guardar el progreso actual? (Y/N)");
+            //answer = scan.next().toUpperCase();
+            
+            //if(answer.equals("Y")){
+              //  guardarArchivos();
+            //}
+            player2.play();
+        }
+}
+    
+    public static void main(String[] args) throws ClassNotFoundException {
         
-//        player1.move(2, 3, 0);
-//        player2.move(0, 4, 3);
-//        Arena.verArena();
-//        
-//        player2.move(2, 4, 3);
-//        Arena.verArena();
-        
-          
-          
-    }  
+        juego = new UI();
+        juego.Arena.verArena();
+        juego.game();
+    }
+    public void guardarArchivos(){
+        File miFile = new File("prueba");
+        FileOutputStream file;
+        ObjectOutputStream objeto;
+        try{
+        // Serializar un objeto de datos a un archivo
+            file = new FileOutputStream(miFile);
+            objeto = new ObjectOutputStream(file);
+            objeto.writeObject(juego);
+            objeto.close();
+        }
+        catch(FileNotFoundException mesage){
+            System.out.println("1"+mesage.getMessage());
+        }catch(IOException mesage){
+            System.out.println("2"+mesage);
+        }            
+    
     /*
     controla el flujo de juego
     
@@ -66,4 +141,19 @@ public class UI {
     
     3 partidas max
     */
+   }
+    
+    public UI cargarArchivos() throws ClassNotFoundException{
+    try{  
+      FileInputStream archivoEntrada = new FileInputStream("prueba.txt");
+      ObjectInputStream objetoEntrada = new ObjectInputStream(archivoEntrada);
+      juego = (UI)objetoEntrada.readObject();
+    }catch(FileNotFoundException mesage){
+            System.out.println("1"+mesage.getMessage());
+        }catch(IOException mesage){
+            System.out.println("2"+mesage.getMessage());
+        }
+      return juego; 
+    }
 }
+    
