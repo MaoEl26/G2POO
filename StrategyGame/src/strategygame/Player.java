@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner; 
 
 public class Player implements Serializable {
-    
     private int maxCost;
     private Unit[] army;
     private Field playField;
@@ -32,7 +31,6 @@ public class Player implements Serializable {
         this.maxCost = 15; // Por ejemplo: x2 lanceros, x1 caballeria, x1 arquero.
         this.army = new Unit[5];
         this.playField = pPlayfield;
-        //this.scan = new Scanner(System.in);
         this.maxCostAux = this.maxCost;
         
     }
@@ -415,8 +413,6 @@ public class Player implements Serializable {
                 + "----------------- " + getName() + " -----------------");
                
         // Se recorren las unidades.
-        
-        
         scan = new Scanner(System.in); 
         
         for (int y = 0; y < this.lastUnit; y++)
