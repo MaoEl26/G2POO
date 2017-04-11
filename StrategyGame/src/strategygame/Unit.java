@@ -3,6 +3,7 @@ package strategygame;
 import java.io.Serializable;
 
 public class Unit implements Serializable {
+    
     private String player;
     private int id;
     private char type;
