@@ -1,6 +1,9 @@
 package strategygame;
 
-public class Unit {
+import java.io.Serializable;
+
+public class Unit implements Serializable {
+    private String player;
     private int id;
     private char type;
     private String name;
@@ -19,9 +22,9 @@ public class Unit {
     
     // Método adicional desplegar estado. 
     
-    public Unit(int pId, char pType, String pName, int mHP, int hP, int atk, 
-            int def, int r, int lvl, int xp, int mov, int cost){
-        
+    public Unit(String player, int pId, char pType, String pName, int mHP, int hP, int atk, 
+            int def, int r, int lvl, int xp, int mov, int pCost){
+        this.player = player;
         this.id = pId;
         this.type = pType;
         this.name = pName;
@@ -33,6 +36,7 @@ public class Unit {
         this.level = lvl;
         this.experience = xp;
         this.movement = mov;
+        this.cost = pCost;
     }
     
     public void setId(int pId){
@@ -90,6 +94,10 @@ public class Unit {
         Unit.cost = pCost;
     } 
     
+    public String getPlayer(){
+        return player;
+    }
+    
     public int getId(){
         return id;
     }
@@ -143,7 +151,7 @@ public class Unit {
     }
     
     public int getCost(){
-        return Unit.cost;
+        return this.cost;
     }
     
     public void win(){
@@ -157,26 +165,7 @@ public class Unit {
             this.experience = 0;
         }
     }
-    
-    public boolean isDead(){
-        if (this.hitPoints == 0){
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-        
-    }
-    
-    public int lastUnit(){
-        return idCount;
-    }
-    
-    public void idCount(){
-        this.idCount++;
-    }
-    
+    @Override  
     public String toString(){
         String mensaje = "";
         mensaje += "Id: " + getId() + " Unidad: " + getName() + " Max Hit Points: " +
