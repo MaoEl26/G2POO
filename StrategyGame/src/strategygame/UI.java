@@ -60,7 +60,7 @@ public final class UI implements Serializable{
         System.out.println("\n");
     }  
       
-    public void game(){
+    private void game(){
         /*
         Controla el flujo del juego y el almacenamiento de partidas
         */
@@ -87,7 +87,7 @@ public final class UI implements Serializable{
         }
 }
      
-    public void guardarArchivos(){
+    private void guardarArchivos(){
         /*
     controla el flujo de juego
     
@@ -140,7 +140,7 @@ public final class UI implements Serializable{
         } 
    }
     
-    public static UI cargarArchivos() throws ClassNotFoundException{
+    private static UI cargarArchivos() throws ClassNotFoundException{
         /*
         Carga una de las 3 partidas almacenadas
         Si se ingresa un numero no valido retorna una partida nula
