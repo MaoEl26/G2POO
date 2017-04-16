@@ -173,7 +173,7 @@ public class Player implements Serializable {
             return true;
         }
         else if (!(0 <= id && id < this.lastUnit)){
-            System.out.println("No existe una unidad con ese id");
+            System.out.println("Id doesn't exist.");
             return false;
             
         }
@@ -261,7 +261,7 @@ public class Player implements Serializable {
         
         // Poner eso en el main si move retorna false.
         
-        System.out.println("No se puede mover a esa posición"); 
+        System.out.println("You can't move to that position."); 
         return false;
     }
         
@@ -281,10 +281,6 @@ public class Player implements Serializable {
         
         String playerUnitInCell = this.playField.getPlayerUnitInCell(posRow, posCol); 
         
-        System.out.println("U: " + unidad.getName() + "Range: " + unidad.getRange());
-        System.out.println("Right range: " + rightRange);
-        System.out.println("Left range: " + leftRange);
-        
         if ("P1".equals(getName())){ 
             forwardAttack = posActualRow + unidad.getRange(); 
             backwardAttack = posActualRow - unidad.getRange();
@@ -297,16 +293,13 @@ public class Player implements Serializable {
             forwardAttack = posActualRow - unidad.getRange();
             backwardAttack = posActualRow + unidad.getRange();
         }
-        System.out.println("La unidad en la pos: (" + posRow + ", " + posCol + ") "
-                + "es: pertenece a: " + playerUnitInCell);
-        
+                
         // Restricciones de movimiento si la unidad es un Lancero o un Arquero.
         
         if ((unidad.getType() == 'L' || unidad.getType() == 'C') 
                     && ((forwardAttack == posRow || backwardAttack == posRow || posActualRow == posRow) 
                     && (rightRange == posCol || leftRange == posCol 
                     || posActualCol == posCol)) && playerUnitInCell != getName()){ 
-            System.out.println("Ataque de lancero o caballeria");
             return true;
         }
         
@@ -316,7 +309,7 @@ public class Player implements Serializable {
                 && ((posActualRow >= posRow && posRow >= forwardAttack || backwardAttack >= posRow && posRow >= posActualRow
                 || posActualRow <= posRow && posRow <= forwardAttack || backwardAttack <= posRow && posRow <= posActualRow) 
                 && (posActualCol <= posCol && posCol <= rightRange || leftRange <= posCol && posCol <= posActualCol)) && playerUnitInCell != getName()){
-            System.out.println("Ataque del arquero");
+            
             return true;
         }
         
@@ -347,15 +340,17 @@ public class Player implements Serializable {
             int posActualCol = this.army[id].getPosY(); // Posición actual en columnas de la unidad.
             
             if (attackRestrictions(unit, posActualRow, posRow, posActualCol, posCol) == true){
-                if (unitAttk > enemyUnitDefense){
-                    if ((enemyUnitLife - enemyUnitDefense - unitAttk) <= 0){
-                        // System.out.println("SI");
+                if (unitAttk >= enemyUnitDefense){
+                    
+                    // Si la venció.
+                    
+                    if ((enemyUnitLife + enemyUnitDefense - unitAttk) <= 0){
                         enemyUnit.setHitPoints(0); // Le baja los puntos de vida a la unidad atacada
                         removeDeadUnit(enemyUnit);
                     }
                     else{
-                        System.out.println("Result: " + (enemyUnitLife - enemyUnitDefense - unitAttk));
-                        enemyUnit.setHitPoints((enemyUnitLife - enemyUnitDefense - unitAttk)); // Le baja los puntos de vida a la unidad atacada
+                        System.out.println("Result: " + (enemyUnitLife + enemyUnitDefense - unitAttk));
+                        enemyUnit.setHitPoints((enemyUnitLife + enemyUnitDefense - unitAttk)); // Le baja los puntos de vida a la unidad atacada
                         System.out.println("Enemy unit actual HitPoints: " + enemyUnit.getHitPoints());
                     }
                     return true;
@@ -462,8 +457,8 @@ public class Player implements Serializable {
                 System.out.println(this.army[i].toString());
             }
             else{
-                System.out.println("Perdiste a la unidad " + this.army[i].getName()
-                + " con id " + i);
+                System.out.println("You lost the unit: " + this.army[i].getName()
+                + " with Id: " + i);
             }
         }
         System.out.printf("\n");
@@ -475,7 +470,7 @@ public class Player implements Serializable {
         enemyUnit.setPosX(-1);
         enemyUnit.setPosY(-1);
         enemyUnit.setId(-1);
-        System.out.println("El nuevo id es: " + enemyUnit.getId());
+        
     }
     
     // Verifica si el jugador perdió
