@@ -76,7 +76,7 @@ public final class UI implements Serializable{
             }
             
             player1.play();
-            System.out.println(player1.getName()+"\nDo you "
+            System.out.println(player2.getName()+"\nDo you "
                     + "want to save the current progress? (Y/N)");
             answer = scanner.next().toUpperCase();
             
