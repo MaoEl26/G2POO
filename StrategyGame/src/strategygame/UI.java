@@ -65,7 +65,7 @@ public final class UI implements Serializable{
         Controla el flujo del juego y el almacenamiento de partidas
         */
         scanner = new Scanner(System.in);
-        while (player1.lose() == false || player2.lose() == false)
+        while (player1.lose() == false && player2.lose() == false)
         {   
             System.out.print(player1.getName()+"\nDo you"
                     + " want to save the current progress? (Y/N)");
@@ -85,6 +85,22 @@ public final class UI implements Serializable{
             }
             player2.play();
         }
+        
+        if (player1.lose() == true)
+        {
+            System.out.println("Player 2 has won!");
+            
+        }
+        
+        else if (player2.lose() == true)
+        {
+            System.out.println("Player 1 has won!");
+   
+        }
+            
+          
+                
+        
 }
      
     private void guardarArchivos(){
@@ -157,6 +173,8 @@ public final class UI implements Serializable{
                 FileInputStream archivoEntrada = new FileInputStream(miFile);
                 ObjectInputStream objetoEntrada = new ObjectInputStream(archivoEntrada);
                 nuevoJuego = (UI) objetoEntrada.readObject();
+                objetoEntrada.close();
+                archivoEntrada.close();
             }catch(FileNotFoundException mesage){
                 System.out.println("1"+mesage.getMessage());
             }catch(IOException mesage){
@@ -224,3 +242,4 @@ public final class UI implements Serializable{
     }
 }
     
+
