@@ -150,8 +150,7 @@ public final class UI implements Serializable{
         System.out.println("Enter the stored game number you want to load (1 - 2 - 3)");
         cargado = stScanner.nextInt();
         
-        if ((1>=cargado)&&(cargado<3)){
-            System.out.println("in");
+        if ((cargado>=1)&&(cargado<=3)){
             File miFile = new File("StrategyGame "+cargado);
             System.out.println(miFile.getName());
             try{  
