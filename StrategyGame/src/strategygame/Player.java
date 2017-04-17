@@ -332,19 +332,21 @@ public class Player implements Serializable {
             Unit enemyUnit = this.playField.getUnitInCell(posRow, posCol);
             int enemyUnitLife = enemyUnit.getHitPoints(); // vida del enemigo.
             int enemyUnitDefense = enemyUnit.getDefense();
-            
-            System.out.println("Damage to be dealt: " + unitAttk);
-            System.out.println("Enemy unit HitPoints: " + enemyUnitLife);
-            System.out.println("Enemy unit Defense: " + enemyUnitDefense);
             int posActualRow = this.army[id].getPosX(); // Posición actual en filas de la unidad.
             int posActualCol = this.army[id].getPosY(); // Posición actual en columnas de la unidad.
             
             if (attackRestrictions(unit, posActualRow, posRow, posActualCol, posCol) == true){
+                
+                System.out.println("Damage to be dealt: " + unitAttk);
+                System.out.println("Enemy unit HitPoints: " + enemyUnitLife);
+                System.out.println("Enemy unit Defense: " + enemyUnitDefense);
+                
                 if (unitAttk >= enemyUnitDefense){
                     
                     // Si la venció.
                     
                     if ((enemyUnitLife + enemyUnitDefense - unitAttk) <= 0){
+                        System.out.println("Unit has been defeated.");
                         enemyUnit.setHitPoints(0); // Le baja los puntos de vida a la unidad atacada
                         removeDeadUnit(enemyUnit);
                     }
@@ -355,7 +357,8 @@ public class Player implements Serializable {
                     }
                     return true;
                 }
-                else{
+                else
+                {
                     System.out.println("Damage wasn't enough.");
                 }
             }
@@ -406,9 +409,10 @@ public class Player implements Serializable {
     public void play(){
         System.out.println("-------------- new turn --------------\n"
                 + "----------------- " + getName() + " -----------------");
-               
-        // Se recorren las unidades.
+        
         scan = new Scanner(System.in); 
+        
+        // Se recorren las unidades.
         
         for (int y = 0; y < this.lastUnit; y++)
         {
@@ -417,33 +421,85 @@ public class Player implements Serializable {
                 System.out.println("Unit: " + this.army[y].getName() + "(" +
                         this.army[y].getId() + ")");
                 System.out.print("Move? ");
-                String auxMove = scan.next();//Aqui marca el err
-                
-                if (auxMove.equals("y"))
+                String auxMove = scan.next(); 
+                do
                 {
-                    System.out.print("Pos x: ");
-                    int posX = scan.nextInt();
+                    if (auxMove.equals("y"))
+                    {
+                        System.out.print("Pos x: ");
+                        int posX = scan.nextInt();
                     
-                    System.out.print("Pos y: ");
-                    int posY = scan.nextInt();
+                        System.out.print("Pos y: ");
+                        int posY = scan.nextInt();
+                            
+                        if (this.move(this.army[y].getId(), posX, posY) == true)
+                        {
+                            break;
+                        }
+                            
+                        else
+                        {
+                            System.out.println("Error.");
+                        }
+                    }
                     
-                    if (this.move(this.army[y].getId(), posX, posY) == false);
+                    else if (auxMove.equals("n"))
+                    {
+                        break;
+                    }
+                    
+                    else
+                    {
+                        System.out.println("Move only accepts y/n");
+                        System.out.print("Move? ");
+                        auxMove = scan.next(); 
+                    }
                 }
+                
+                while ((auxMove.equals("y") != true) || (auxMove.equals("n") != true));
                 
                 System.out.print("Attack? ");
                 String auxAttack = scan.next();
                 
-                if (auxAttack.equals("y"))
+                do
                 {
-                    System.out.print("Pos x: ");
-                    int posX = scan.nextInt();
+                    if (auxAttack.equals("y"))
+                    {
+                        System.out.print("Pos x: ");
+                        int posX = scan.nextInt();
                     
-                    System.out.print("Pos y: ");
-                    int posY = scan.nextInt();
+                        System.out.print("Pos y: ");
+                        int posY = scan.nextInt();
                     
-                    this.attack(this.army[y].getId(), posX, posY);
+                        if ((this.attack(this.army[y].getId(), posX, posY)) == true)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (posX == -1 && posY == -1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Error");
+                            }
+                        }
+                    }
+                    
+                    else if (auxAttack.equals("n"))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Attack only accepts y/n");
+                        System.out.print("Attack? ");
+                        auxAttack = scan.next();
+                    }
                 }
-                
+                while ((auxAttack.equals("y") != true) || (auxAttack.equals("n") != true));
                 this.playField.verArena();
             }
         }
@@ -466,11 +522,19 @@ public class Player implements Serializable {
     
     // Remueve una unidad muerta sustituyendo si id con un -1
     
-    public void removeDeadUnit(Unit enemyUnit){ 
+    public void removeDeadUnit(Unit enemyUnit)
+    {   
+        int auxiliarX = enemyUnit.getPosX();
+        int auxiliarY = enemyUnit.getPosY();
+        
+        // Se procede a eliminar la unidad en esa celda.
+        
+        this.playField.setPassableCell(auxiliarX, auxiliarY, false);
+        this.playField.setUnitInCell(auxiliarX, auxiliarY, null);
+        
         enemyUnit.setPosX(-1);
         enemyUnit.setPosY(-1);
         enemyUnit.setId(-1);
-        
     }
     
     // Verifica si el jugador perdió
