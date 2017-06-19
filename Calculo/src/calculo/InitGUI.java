@@ -176,6 +176,9 @@ public class InitGUI extends javax.swing.JFrame {
         LimGUI limVentana = new LimGUI(this,funcionInicial);
         limVentana.setVisible(true);
         this.setVisible(false);
+        this.deActivateButtons();
+        this.funcion.setText("f(x)=");
+        this.funcionInicial=null;
     }//GEN-LAST:event_limiteBotonActionPerformed
 
     private void derivadaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivadaBotonActionPerformed
@@ -183,6 +186,9 @@ public class InitGUI extends javax.swing.JFrame {
         DerivadaGUI derIVentana = new DerivadaGUI(this,funcionInicial);
         derIVentana.setVisible(true);
         this.setVisible(false);
+        this.deActivateButtons();
+        this.funcion.setText("f(x)=");
+        this.funcionInicial=null;
     }//GEN-LAST:event_derivadaBotonActionPerformed
 
     private void integralBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integralBotonActionPerformed
@@ -190,6 +196,9 @@ public class InitGUI extends javax.swing.JFrame {
         IntegralGUI intVentana = new IntegralGUI(this,funcionInicial);
         intVentana.setVisible(true);
         this.setVisible(false);
+        this.deActivateButtons();
+        this.funcion.setText("f(x)=");
+        this.funcionInicial=null;
     }//GEN-LAST:event_integralBotonActionPerformed
 
     private void almacenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almacenarActionPerformed

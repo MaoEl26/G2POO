@@ -8,7 +8,6 @@ package calculo;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.mariuszgromada.math.mxparser.*;
-import org.mariuszgromada.math.mxparser.mathcollection.Calculus;
 
 /**
  *
@@ -145,7 +144,8 @@ public class LimGUI extends javax.swing.JFrame {
                     "Variable Incompatible",JOptionPane.ERROR_MESSAGE);
         }
         if (flag){
-            
+            MetodoAproximacion metodo = new MetodoAproximacion(funcion);
+            System.out.println(metodo.LimiteEn(variableX));
         }
         
     }//GEN-LAST:event_calculoLimiteActionPerformed
