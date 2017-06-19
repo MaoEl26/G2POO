@@ -5,7 +5,6 @@
  */
 package calculo;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 import org.mariuszgromada.math.mxparser.*;
 
@@ -174,14 +173,14 @@ public class InitGUI extends javax.swing.JFrame {
 
     private void limiteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limiteBotonActionPerformed
         
-        LimGUI limVentana = new LimGUI(this,funcionString);
+        LimGUI limVentana = new LimGUI(this,funcionInicial);
         limVentana.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_limiteBotonActionPerformed
 
     private void derivadaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivadaBotonActionPerformed
         
-        DerivadaGUI derIVentana = new DerivadaGUI(this,funcionString);
+        DerivadaGUI derIVentana = new DerivadaGUI(this,funcionInicial);
         derIVentana.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_derivadaBotonActionPerformed

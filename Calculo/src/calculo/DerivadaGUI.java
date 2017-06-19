@@ -7,6 +7,7 @@ package calculo;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.mariuszgromada.math.mxparser.Function;
 
 /**
  *
@@ -19,12 +20,14 @@ public class DerivadaGUI extends javax.swing.JFrame {
      */
     InitGUI ventanaPrincipal;
     String funcionString;
+    Function funcion;
     Double variableX = null;
     
-    public DerivadaGUI(InitGUI ventanaPrincipal,String funcionString) {
+    public DerivadaGUI(InitGUI ventanaPrincipal,Function funcion) {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
-        this.funcionString = funcionString;
+        this.funcion = funcion;
+        this.funcionString = funcion.getFunctionExpressionString();
         función.setText("Función = "+funcionString);
         this.setTitle(ventanaPrincipal.getTitle());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

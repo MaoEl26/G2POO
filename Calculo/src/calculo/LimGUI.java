@@ -7,6 +7,8 @@ package calculo;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.mariuszgromada.math.mxparser.*;
+import org.mariuszgromada.math.mxparser.mathcollection.Calculus;
 
 /**
  *
@@ -19,12 +21,14 @@ public class LimGUI extends javax.swing.JFrame {
      */
     InitGUI ventanaPrincipal;
     String funcionString;
+    Function funcion;
     Double variableX = null;
     
-    public LimGUI(InitGUI ventanaPrincipal, String funcionString) {
+    public LimGUI(InitGUI ventanaPrincipal, Function funcion) {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
-        this.funcionString = funcionString;
+        this.funcion = funcion;
+        this.funcionString = funcion.getFunctionExpressionString();
         función.setText("Función = "+funcionString);
         this.setTitle(ventanaPrincipal.getTitle());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -125,19 +129,25 @@ public class LimGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorXActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_valorXActionPerformed
 
     private void calculoLimiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoLimiteActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
         if (ventanaPrincipal.checkValue(valorX.getText())){
             variableX = Double.parseDouble(valorX.getText());    
+            flag = true;
         }else
         {
             JOptionPane.showMessageDialog(null,"El valor X no es un número o "
                     + "el campo está vacio",
                     "Variable Incompatible",JOptionPane.ERROR_MESSAGE);
         }
+        if (flag){
+            
+        }
+        
     }//GEN-LAST:event_calculoLimiteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
