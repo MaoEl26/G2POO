@@ -26,11 +26,12 @@ public class FunctionVisualizer{//extends JFrame
     private int minX=-10;
     private int maxX=10;
     private XYSeries serieFuncion,lineaValorA,lineaValorB;
+    private XYSeries serie0,serie1,serie2,serie3,serie4;
     private Function funcion;
     private double valorA,valorB,valorX ;
     private XYSeriesCollection dataset;
     private JFreeChart chart;
-
+    private double[] puntosCentrales;       // Arreglo con la derivada de los puntos.
     /**
      *
      * @param funcion
@@ -59,6 +60,16 @@ public class FunctionVisualizer{//extends JFrame
         dataSetLimit();
     }
     
+        // Constructor para el método de Diferencias Centrales.
+    public FunctionVisualizer(Function pFuncion, double[] pPuntosCentrales){
+        this.funcion = pFuncion;                    // Función dada por el usuario.
+        this.puntosCentrales = pPuntosCentrales;    // Arreglo de puntos.
+        SerieFuncion();                             // Grafica la función. 
+        SeriesDerivada();
+        dataSetDerivate();
+    }
+    
+    
     private void dataSetIntegral(){
         dataset = new XYSeriesCollection();
         dataset.addSeries(serieFuncion);
@@ -66,10 +77,51 @@ public class FunctionVisualizer{//extends JFrame
         dataset.addSeries(lineaValorB);
     }
     
+    private void dataSetDerivate(){
+        dataset = new XYSeriesCollection();
+        dataset.addSeries(serieFuncion);
+        dataset.addSeries(serie0);
+        dataset.addSeries(serie1);
+        dataset.addSeries(serie2);
+        dataset.addSeries(serie3);
+        dataset.addSeries(serie4);
+    }
+    
     private void dataSetLimit(){
         dataset = new XYSeriesCollection();
         dataset.addSeries(serieFuncion);
         dataset.addSeries(lineaValorA);
+    }
+    
+    private void SeriesDerivada(){
+        for(int x = 0;x<5;x++){
+            double resultadoFuncion = funcion.calculate(valorA);
+            for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+            {
+                serie0.add(1,2);
+            }
+        }
+        double resultadoFuncion = funcion.calculate(valorA);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            serie1.add(1,2);
+        }
+        resultadoFuncion = funcion.calculate(valorA);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            serie2.add(1,2);
+        }
+        resultadoFuncion = funcion.calculate(valorA);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            serie3.add(1,2);
+        }
+        resultadoFuncion = funcion.calculate(valorA);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            serie4.add(1,2);
+        }
+        
     }
     
     private void SerieValorX(){

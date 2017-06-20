@@ -24,7 +24,7 @@ public class GraficoGUI extends javax.swing.JFrame {
     private Function funcion;
     private FunctionVisualizer visualizador;
     private double valorA,valorB,valorX;
-    
+    private double[] Puntos;                    // Puntos de la derivada.
     private Double resultado;
     private int indicadorMetodo;
     
@@ -81,6 +81,12 @@ public class GraficoGUI extends javax.swing.JFrame {
         this.metodo = metodo;
     }
     
+    public void setDerivateValues(double pValorX, double[] pPuntos, String pMetodo){
+        this.valorX = pValorX;  // Valor donde se evalúa.
+        this.Puntos = pPuntos;  // Los puntos de la gráfica.
+        this.metodo = pMetodo;  // Método utilizado.
+        
+    }
     /**
      *
      */
@@ -96,7 +102,8 @@ public class GraficoGUI extends javax.swing.JFrame {
             }
         }
         if(indicadorMetodo == 2){
-            
+            visualizador = new FunctionVisualizer(funcion, Puntos);
+            respuestaSalida.setText(resultado.toString());
         }
         if(indicadorMetodo == 3){
             visualizador = new FunctionVisualizer(funcion, valorA, valorB);

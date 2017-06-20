@@ -23,6 +23,8 @@ public class DerivadaGUI extends javax.swing.JFrame {
     private Function funcion;
     private Double variableX = null;
     private final int indicadorMetodo = 2;
+    private double[] listaValoresX;         // Lista auxiliar para mantener los puntos.
+    private double resultado;               // Resultado de la derivada.
     
     /**
      *
@@ -151,6 +153,10 @@ public class DerivadaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (ventanaPrincipal.checkValue(valorX.getText())){
             variableX = Double.parseDouble(valorX.getText());
+            MetodoDiferenciasCentrales Auxiliar = new MetodoDiferenciasCentrales(funcion, variableX);
+            Auxiliar.calcularDerivadaEn(variableX);
+            listaValoresX = Auxiliar.getListaCentrada();
+            resultado = listaValoresX[2];
             graficar.setEnabled(true);
         }else
         {
