@@ -5,7 +5,10 @@
  */
 package calculo;
 
-import org.mariuszgromada.math.mxparser.*;
+//import org.mariuszgromada.math.mxparser.*;
+
+import org.mariuszgromada.math.mxparser.Function;
+
 
 
 //import javax.swing.JPanel;
@@ -18,7 +21,7 @@ import org.mariuszgromada.math.mxparser.*;
 //import org.jfree.ui.ApplicationFrame;
 //import org.jfree.ui.RefineryUtilities;
  
-//public class Calculo extends ApplicationFrame {
+public class Calculo  {//extends ApplicationFrame
    
 //   public Calculo( String title ) {
 //      super( title ); 
@@ -49,23 +52,25 @@ import org.mariuszgromada.math.mxparser.*;
 //      JFreeChart chart = createChart(createDataset( ) );  
 //      return new ChartPanel( chart ); 
 //   }
-//}
 
-   //public static void main( String[ ] args ) {
-      //Calculo demo = new Calculo( "Mobile Sales" );  
-      //demo.setSize( 560 , 367 );    
-      //RefineryUtilities.centerFrameOnScreen( demo );    
-      //demo.setVisible( true ); 
-     // FunctionVisualizer fv= new FunctionVisualizer("F(x)");
-   //}
-//}
+
+   public static void main( String[ ] args ) {
+//      Calculo demo = new Calculo( "Mobile Sales" );  
+//      demo.setSize( 560 , 367 );    
+//      RefineryUtilities.centerFrameOnScreen( demo );    
+//      demo.setVisible( true ); 
+      //Function funcion = new Function("f(x)= (x^2 -1 )/(x+1)");
+      //Function funcion = new Function("f(x)= 1/x");
+      //FunctionVisualizer fv= new FunctionVisualizer(funcion);
+  }
+}
 
 
 /**
  *
  * @author Mauricio Castillo
  */
-public class Calculo {
+//public class Calculo {
 
     /**
      * @param args the command line arguments
@@ -81,4 +86,4 @@ public class Calculo {
 //        System.out.println(f.getParametersNumber());
 //    }
     
-}
+

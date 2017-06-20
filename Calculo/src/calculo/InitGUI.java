@@ -49,6 +49,11 @@ public class InitGUI extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         setForeground(java.awt.Color.blue);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         etiqueta1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         etiqueta1.setText("Resolución de una Función");
@@ -214,6 +219,11 @@ public class InitGUI extends javax.swing.JFrame {
 //      //System.out.println(funcionInicial.calculate(6));
         
     }//GEN-LAST:event_almacenarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

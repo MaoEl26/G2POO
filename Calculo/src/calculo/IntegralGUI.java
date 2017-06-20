@@ -18,11 +18,11 @@ public class IntegralGUI extends javax.swing.JFrame {
     /**
      * Creates new form IntegralLimite
      */
-    InitGUI ventanaPrincipal;
-    String funcionString;
-    Function funcion;
-    Double variableA,variableB = null;
-    Integer intervalos = null;
+    private InitGUI ventanaPrincipal;
+    private String funcionString,metodoUsado;
+    private Function funcion;
+    private Double variableA = null,variableB = null,resultadoOperacion;
+    private Integer intervalos = null;
     
     /**
      *
@@ -35,7 +35,7 @@ public class IntegralGUI extends javax.swing.JFrame {
         this.funcion = funcion;
         this.funcionString = funcion.getFunctionExpressionString();
         función.setText("Función = "+funcionString);
-        
+        graficar.setEnabled(false);
         this.setTitle(ventanaPrincipal.getTitle());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -70,6 +70,11 @@ public class IntegralGUI extends javax.swing.JFrame {
 
         graficar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         graficar.setText("Graficar");
+        graficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficarActionPerformed(evt);
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Poor Richard", 2, 24)); // NOI18N
         titulo.setText("Cálculo de la Integral");
@@ -209,8 +214,12 @@ public class IntegralGUI extends javax.swing.JFrame {
         }
         if (flag){
             MetodoTrapecio metodo = new MetodoTrapecio(funcion,intervalos);
-            System.out.println(metodo.calcularIntegralDefinida
-        (variableA, variableB));
+            metodoUsado = "Trapecio";
+            calculoIntegralSimpson.setEnabled(!flag);
+            resultadoOperacion = metodo.calcularIntegralDefinida
+        (variableA, variableB);
+            graficar.setEnabled(flag);
+            
         }
         
     }//GEN-LAST:event_calculoIntegralTrapecioActionPerformed
@@ -249,11 +258,30 @@ public class IntegralGUI extends javax.swing.JFrame {
         }
         if (flag){
             MetodoSimpson metodo = new MetodoSimpson(funcion,intervalos);
-            System.out.println(metodo.calcularIntegralDefinida
-        (variableA, variableB));
+            metodoUsado = "Simpson";
+            calculoIntegralTrapecio.setEnabled(!flag);
+            graficar.setEnabled(flag);
+            resultadoOperacion = metodo.calcularIntegralDefinida
+        (variableA, variableB);
         }
     }//GEN-LAST:event_calculoIntegralSimpsonActionPerformed
 
+    private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        // TODO add your handling code here:
+        GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,3);
+        graficoGUI.setIntegralValues(variableA, variableB, 
+                resultadoOperacion, metodoUsado);
+        graficoGUI.setGrafica();
+        graficoGUI.setVentana(this);
+        graficoGUI.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_graficarActionPerformed
+
+    public void setStateButtons(){
+        calculoIntegralSimpson.setEnabled(true);
+        calculoIntegralTrapecio.setEnabled(true);
+        graficar.setEnabled(false);
+    }
     /**
      * @param args the command line arguments
      */

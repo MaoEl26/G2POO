@@ -18,10 +18,10 @@ public class LimGUI extends javax.swing.JFrame {
     /**
      * Creates new form LimGUI
      */
-    InitGUI ventanaPrincipal;
-    String funcionString;
-    Function funcion;
-    Double variableX = null;
+    private InitGUI ventanaPrincipal;
+    private String funcionString;
+    private Function funcion;
+    private Double variableX = null;
     
     public LimGUI(InitGUI ventanaPrincipal, Function funcion) {
         initComponents();

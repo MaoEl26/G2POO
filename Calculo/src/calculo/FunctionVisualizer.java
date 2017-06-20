@@ -10,41 +10,71 @@ package calculo;
  * @author Mauricio Castillo
  */
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.mariuszgromada.math.mxparser.Function;
 
-public class FunctionVisualizer extends JFrame implements ActionListener {
+public class FunctionVisualizer{//extends JFrame
     // define X range
-    public int minX=1;
-    public int maxX=100;
+    private int minX=-100;
+    private int maxX=100;
+    private XYSeries serieFuncion;
+    private XYSeries lineaValorA;
+    private XYSeries lineaValorB;
+    private Function funcion;
+    private double valorA,valorB;
+    private XYSeriesCollection dataset;
+    private JFreeChart chart;
 
-    JFreeChart chart;
-
-    public FunctionVisualizer(String title){
-        super(title);
-        // Create a simple XY chart
-        XYSeries series = new XYSeries("function");
-        for (int i = minX; i < maxX; i++)
+    public FunctionVisualizer(Function funcion,double valorA, double valorB){
+        this.funcion = funcion;
+        this.valorA = valorA;
+        this.valorB = valorB;
+        SerieFuncion();
+        SerieValorAyB();
+        dataSetIntegral();
+    }
+    
+    private void dataSetIntegral(){
+        dataset = new XYSeriesCollection();
+        dataset.addSeries(serieFuncion);
+        dataset.addSeries(lineaValorA);
+        dataset.addSeries(lineaValorB);
+    }
+    
+    private void SerieFuncion(){
+        serieFuncion = new XYSeries("Función");
+        for (double i = minX; i < maxX; i=i+0.5)
         {
-            series.add(i,f(i));
+            serieFuncion.add(i,funcion.calculate(i));
         }
-
-        // Add the series to your data set
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(series);
+    }
+    
+    private void SerieValorAyB(){
+        lineaValorA = new XYSeries("Valor A");
+        lineaValorB = new XYSeries("Valor B");
+        
+        double resultadoFuncion = funcion.calculate(valorA);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            lineaValorA.add(valorA,i);
+        }
+        
+        resultadoFuncion = funcion.calculate(valorB);
+        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+        {
+            lineaValorB.add(valorB,i);
+        }
+    }
+    
+    public ChartPanel creacionGrafico(){
         // Generate the graph
         chart = ChartFactory.createXYLineChart(
             "f(x)",                       // Title
@@ -58,42 +88,13 @@ public class FunctionVisualizer extends JFrame implements ActionListener {
             );
 
         ChartPanel panel = new ChartPanel(chart);
-
-        JButton saveButton = new JButton("Save...");
-        saveButton.addActionListener(this);
-
-        getContentPane().setLayout(new FlowLayout());
-        getContentPane().add(panel);
-        getContentPane().add(saveButton);
-
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
-        setVisible(true);    
-    }
-
-    private double f(int x){
-        int inf=Integer.MAX_VALUE;
-        // define your function
-        if (x==0) return inf;
-        return (x*x);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fc=new JFileChooser("C:/");
-        fc.setCurrentDirectory(new File("C:/"));
-        fc.setSelectedFile(new File("C:/chart1.jpg"));
-        int ret=fc.showSaveDialog(null);
-        if(ret==fc.APPROVE_OPTION)
-        {
-            try {
-                System.out.print("Saving"+ fc.getSelectedFile().getAbsolutePath()+"\n");
-                ChartUtilities.saveChartAsJPEG(fc.getSelectedFile(), chart, 500, 300);
-            } catch (IOException IOe) {
-                System.err.println("Problemrred creating chart.");
-                IOe.printStackTrace();     
-            }
-        }
-
+        return panel;
+    
+//        getContentPane().setLayout(new FlowLayout());
+//        getContentPane().add(panel);
+//
+//        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//        pack();
+//        setVisible(true);
     }
 }

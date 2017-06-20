@@ -18,10 +18,10 @@ public class DerivadaGUI extends javax.swing.JFrame {
     /**
      * Creates new form DerivadaGUI
      */
-    InitGUI ventanaPrincipal;
-    String funcionString;
-    Function funcion;
-    Double variableX = null;
+    private InitGUI ventanaPrincipal;
+    private String funcionString;
+    private Function funcion;
+    private Double variableX = null;
     
     public DerivadaGUI(InitGUI ventanaPrincipal,Function funcion) {
         initComponents();
