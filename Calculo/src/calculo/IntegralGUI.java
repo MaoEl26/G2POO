@@ -174,7 +174,9 @@ public class IntegralGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        /*
+        Limpia los valores y restablece el estabo inicial de los valores
+        */
         valorA.setText("");
         valorB.setText("");
         ventanaPrincipal.setVisible(true);
@@ -183,7 +185,11 @@ public class IntegralGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void calculoIntegralTrapecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoIntegralTrapecioActionPerformed
-        // TODO add your handling code here:
+        /*
+        Analiza que los valores sean numericos
+        De lo contrario devuelve un mensaje del dato que es erroneo
+        Inicializa el metodo correspondiente para realizar los calculo
+        */
         boolean flag = true;
         if (ventanaPrincipal.checkValue(valorA.getText())){
             variableA = Double.parseDouble(valorA.getText());
@@ -227,7 +233,11 @@ public class IntegralGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_calculoIntegralTrapecioActionPerformed
 
     private void calculoIntegralSimpsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoIntegralSimpsonActionPerformed
-        // TODO add your handling code here:
+        /*
+        Analiza que los valores sean numericos
+        De lo contrario devuelve un mensaje del dato que es erroneo
+        Inicializa el metodo correspondiente para realizar los calculo
+        */
         boolean flag = true;
         if (ventanaPrincipal.checkValue(valorA.getText())){
             variableA = Double.parseDouble(valorA.getText());
@@ -269,7 +279,10 @@ public class IntegralGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_calculoIntegralSimpsonActionPerformed
 
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
-        // TODO add your handling code here:
+        /*
+        Inicializa la ventana para graficar y le envía los datos necesarios 
+        para su funcionamiento
+        */
         GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
                 indicadorMetodo);
         graficoGUI.setIntegralValues(variableA, variableB, 
@@ -284,6 +297,10 @@ public class IntegralGUI extends javax.swing.JFrame {
      *
      */
     public void setStateButtons(){
+        /*
+        Habilita los botones para realizar calculo y 
+        desactiva el boton de graficar
+        */
         calculoIntegralSimpson.setEnabled(true);
         calculoIntegralTrapecio.setEnabled(true);
         graficar.setEnabled(false);

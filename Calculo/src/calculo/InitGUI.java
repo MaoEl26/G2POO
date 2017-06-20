@@ -155,12 +155,13 @@ public class InitGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Desactiva todos los botones de funciones matematicas
     private void deActivateButtons(){
         limiteBoton.setEnabled(false);
         derivadaBoton.setEnabled(false);
         integralBoton.setEnabled(false);
 }
-    
+    //Activa todos los botones de funciones matematicas
     private void activateButtons(){
         limiteBoton.setEnabled(true);
         derivadaBoton.setEnabled(true);
@@ -173,6 +174,7 @@ public class InitGUI extends javax.swing.JFrame {
      * @return
      */
     public boolean checkValue(String texto){
+        //Analiza si el valor se puede convertir a un número
         try{
             Double.parseDouble(texto);
             return true;
@@ -186,7 +188,7 @@ public class InitGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_funcionActionPerformed
 
     private void limiteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limiteBotonActionPerformed
-        
+        //Crea una ventana para el calculo del limite
         LimGUI limVentana = new LimGUI(this,funcionInicial);
         limVentana.setVisible(true);
         this.setVisible(false);
@@ -196,7 +198,7 @@ public class InitGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_limiteBotonActionPerformed
 
     private void derivadaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivadaBotonActionPerformed
-        
+        //Crea una ventana para el calculo de la derivada
         DerivadaGUI derIVentana = new DerivadaGUI(this,funcionInicial);
         derIVentana.setVisible(true);
         this.setVisible(false);
@@ -206,7 +208,7 @@ public class InitGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_derivadaBotonActionPerformed
 
     private void integralBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integralBotonActionPerformed
-        
+        //Crea una ventana para el calculo del limite de la integral
         IntegralGUI intVentana = new IntegralGUI(this,funcionInicial);
         intVentana.setVisible(true);
         this.setVisible(false);
@@ -216,7 +218,8 @@ public class InitGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_integralBotonActionPerformed
 
     private void almacenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almacenarActionPerformed
-        
+        //Almacena la funcion ingresada por el usuario
+        //Activa los botones si es una funcion correcta
         funcionInicial = new Function(funcion.getText());
         funcionString = funcionInicial.getFunctionExpressionString();
         if (!funcionString.equals("")){

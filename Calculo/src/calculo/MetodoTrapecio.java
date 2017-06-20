@@ -21,6 +21,7 @@ public class MetodoTrapecio implements CalculoIntegral{
      * @param valorN
      */
     public MetodoTrapecio(Function funcion, int valorN){
+        //Inicializa los valores a utilizar
         this.funcion = funcion; 
         this.valorN = valorN;
     }
@@ -33,6 +34,9 @@ public class MetodoTrapecio implements CalculoIntegral{
      */
     @Override
     public double calcularIntegralDefinida(double a,double b){
+        /*
+        Calcula los valores necesarios para el resultado de la integral 
+        */
         this.valorA = a;
         this.valorB = b;
         calcularValorH();
@@ -41,6 +45,7 @@ public class MetodoTrapecio implements CalculoIntegral{
     }
       
     private double evaluarTrapecioExtendido(){
+        //Realiza la sumatoria del metodo del trapecio extendido
         double resultado = ((funcion.calculate(valorA)+funcion.calculate(valorB))/2);
         for (int i = 1; i<valorN;i++){
             resultado += funcion.calculate(valorA+i*valorH);
@@ -50,6 +55,7 @@ public class MetodoTrapecio implements CalculoIntegral{
     }
     
     private void calcularValorH(){
+        //Calcula el valor del ancho del segmento de la integral
         valorH = (valorB-valorA)/valorN;
     }
     

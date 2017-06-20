@@ -144,7 +144,11 @@ public class LimGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_valorXActionPerformed
 
     private void calculoLimiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoLimiteActionPerformed
-        // TODO add your handling code here:
+        /*
+        En esta función valida que el valor ingresado por el usuario sea 
+        un número y además llama a los métodos para realizar los calculos.
+        Habilita el botón de graficar
+        */
         boolean flag = false;
         if (ventanaPrincipal.checkValue(valorX.getText())){
             variableX = Double.parseDouble(valorX.getText());    
@@ -165,11 +169,14 @@ public class LimGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_calculoLimiteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
         ventanaPrincipal.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        /*
+        Inicializa la ventana para graficar y le envía los datos necesarios 
+        para su funcionamiento
+        */
         GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
                 indicadorMetodo);
         graficoGUI.setLimitValues(variableX, resultado, metodoUsado);

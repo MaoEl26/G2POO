@@ -35,6 +35,11 @@ public class MetodoAproximacion implements CalculoLimite{
      */
     @Override
     public Double LimiteEn(double x){
+        /*
+        Inicializa los valores 
+        Calcula el limite superior e inferior de los valor ingresado
+        si es igual devuelve el valor calculado
+        */
         this.valorX = x;
         tendenciaSuperior = CalculoLimiteSuperior();
         tendenciaInferior = CalculoLimiteInferior();
@@ -63,6 +68,10 @@ public class MetodoAproximacion implements CalculoLimite{
     }
     
     private ArrayList<Double> CalculoLimiteSuperior(){
+        /*
+        Calcula el limite superior mediante un ciclo de 4 puntos
+        y los almacena en un arreglo
+        */
         double restaValor = 0.1;
         double valorSuperior = valorX+restaValor;
         DecimalFormat formato = new DecimalFormat("######.####");
@@ -78,6 +87,10 @@ public class MetodoAproximacion implements CalculoLimite{
     }
     
     private ArrayList<Double> CalculoLimiteInferior(){
+         /*
+        Calcula el limite inferior mediante un ciclo de 4 puntos 
+        y los almacena en un arreglo
+        */
         double sumaValor = 0.1;
         double valorInferior = valorX-sumaValor;
         DecimalFormat formato = new DecimalFormat("######.####");

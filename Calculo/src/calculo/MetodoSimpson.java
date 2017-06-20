@@ -26,6 +26,7 @@ public class MetodoSimpson implements CalculoIntegral {
      * @param valorN
      */
     public MetodoSimpson(Function funcion,int valorN){
+        //Inicializa los valores del metodo
         this.funcion = funcion;
         this.valorN = valorN;
     }
@@ -38,6 +39,8 @@ public class MetodoSimpson implements CalculoIntegral {
      */
     @Override
     public double calcularIntegralDefinida(double a,double b){
+        //Setea los valores de los puntos a,b y 
+        //realiza los calculos necesarios
         this.valorA = a;
         this.valorB = b;
         calcularValorH();
@@ -45,6 +48,9 @@ public class MetodoSimpson implements CalculoIntegral {
     }
     
     private double evaluarSimpsonExtendido(){
+        /*
+        Realiza los calculos de la sumatoria por medio del metodo de Simpson
+        */
         double resultado = funcion.calculate(valorA);
         double resultadosPares = 0,resultadosImpares = 0;
         for(int i=1; i<valorN;i++){
@@ -61,6 +67,7 @@ public class MetodoSimpson implements CalculoIntegral {
     }
     
     private void calcularValorH(){
+        //Calcula el ancho del segmento de la integral
         valorH = (valorB-valorA)/valorN;
     }
 }
