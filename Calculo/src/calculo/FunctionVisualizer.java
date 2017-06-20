@@ -23,8 +23,8 @@ import org.mariuszgromada.math.mxparser.Function;
 
 public class FunctionVisualizer{//extends JFrame
     // define X range
-    private int minX=-100;
-    private int maxX=100;
+    private int minX=-10;
+    private int maxX=10;
     private XYSeries serieFuncion;
     private XYSeries lineaValorA;
     private XYSeries lineaValorB;

@@ -18,14 +18,12 @@ public class MetodoTrapecio implements CalculoIntegral{
     public MetodoTrapecio(Function funcion, int valorN){
         this.funcion = funcion; 
         this.valorN = valorN;
-        System.out.println("trapecio");
     }
     
     @Override
     public double calcularIntegralDefinida(double a,double b){
         this.valorA = a;
         this.valorB = b;
-        System.out.println(funcion.getFunctionExpressionString()+" "+valorN);
         calcularValorH();
         
     return evaluarTrapecioExtendido();

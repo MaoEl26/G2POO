@@ -24,7 +24,8 @@ public class GraficoGUI extends javax.swing.JFrame {
     private String funcionString, metodo;
     private Function funcion;
     private FunctionVisualizer visualizador;
-    private double valorA,valorB,resultado;
+    private double valorA,valorB;
+    private Double resultado;
     private ChartPanel panel;
     private int indicadorMetodo;
     
@@ -60,10 +61,13 @@ public class GraficoGUI extends javax.swing.JFrame {
             
         }
         if(indicadorMetodo == 3){
+            panelGrafico.setLayout(new java.awt.BorderLayout());
             visualizador = new FunctionVisualizer(funcion, valorA, valorB);
             panelGrafico.removeAll();
             panelGrafico.add(visualizador.creacionGrafico(),BorderLayout.CENTER);
             panelGrafico.validate();
+            mensajeLabel.setText("El resultado del método: "+metodo+" es");
+            respuestaSalida.setText(resultado.toString());
         }
         
     }
@@ -86,6 +90,7 @@ public class GraficoGUI extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -93,11 +98,6 @@ public class GraficoGUI extends javax.swing.JFrame {
         });
 
         panelGrafico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panelGrafico.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                panelGraficoComponentAdded(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelGraficoLayout = new javax.swing.GroupLayout(panelGrafico);
         panelGrafico.setLayout(panelGraficoLayout);
@@ -107,7 +107,7 @@ public class GraficoGUI extends javax.swing.JFrame {
         );
         panelGraficoLayout.setVerticalGroup(
             panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         funcionLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -141,22 +141,23 @@ public class GraficoGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(mensajeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(respuestaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(funcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(funcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(mensajeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(respuestaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(menuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,8 +165,8 @@ public class GraficoGUI extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(funcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 33, Short.MAX_VALUE)
+                .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mensajeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(respuestaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,12 +206,6 @@ public class GraficoGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
-
-    private void panelGraficoComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_panelGraficoComponentAdded
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_panelGraficoComponentAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

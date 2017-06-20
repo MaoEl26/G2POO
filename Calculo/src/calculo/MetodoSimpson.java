@@ -28,7 +28,6 @@ public class MetodoSimpson implements CalculoIntegral {
     public MetodoSimpson(Function funcion,int valorN){
         this.funcion = funcion;
         this.valorN = valorN;
-        System.out.println("simpson");
     }
     
     /**
@@ -41,7 +40,6 @@ public class MetodoSimpson implements CalculoIntegral {
     public double calcularIntegralDefinida(double a,double b){
         this.valorA = a;
         this.valorB = b;
-        System.out.println(funcion.getFunctionExpressionString()+" "+valorN);
         calcularValorH();
         return evaluarSimpsonExtendido();
     }
