@@ -15,11 +15,22 @@ public class MetodoTrapecio implements CalculoIntegral{
     private double valorA,valorB,valorN,valorH;
     private Function funcion;
     
+    /**
+     *
+     * @param funcion
+     * @param valorN
+     */
     public MetodoTrapecio(Function funcion, int valorN){
         this.funcion = funcion; 
         this.valorN = valorN;
     }
     
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     @Override
     public double calcularIntegralDefinida(double a,double b){
         this.valorA = a;

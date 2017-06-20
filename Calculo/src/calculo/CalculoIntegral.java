@@ -10,5 +10,12 @@ package calculo;
  * @author Mauricio Castillo
  */
 public interface CalculoIntegral {
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public double calcularIntegralDefinida(double a, double b);
 }

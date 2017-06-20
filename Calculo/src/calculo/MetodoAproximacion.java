@@ -20,10 +20,19 @@ public class MetodoAproximacion implements CalculoLimite{
     private ArrayList<Double> tendenciaSuperior;
     private ArrayList<Double> tendenciaInferior;
     
+    /**
+     *
+     * @param funcion
+     */
     public MetodoAproximacion(Function funcion){
         this.funcion = funcion;
     }
     
+    /**
+     *
+     * @param x
+     * @return
+     */
     @Override
     public Double LimiteEn(double x){
         this.valorX = x;
@@ -37,10 +46,18 @@ public class MetodoAproximacion implements CalculoLimite{
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Double> getTendenciaSuperior(){
         return tendenciaSuperior;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Double> getTendenciaInferior(){
         return tendenciaInferior;
     }

@@ -10,5 +10,11 @@ package calculo;
  * @author Mauricio Castillo
  */
 public interface CalculoDerivada {
+
+    /**
+     *
+     * @param x
+     * @return
+     */
     public double calcularDerivadaEn(double x);
 }

@@ -19,6 +19,11 @@ public class MetodoDiferenciasCentrales implements CalculoDerivada {
     private double[] lista2;        // Centrada.
     private double[] lista3;        // Progresiva.
     
+    /**
+     *
+     * @param pFuncion
+     * @param h
+     */
     public MetodoDiferenciasCentrales(Function pFuncion, double h)
     {
         this.Funcion = pFuncion;
@@ -30,18 +35,35 @@ public class MetodoDiferenciasCentrales implements CalculoDerivada {
         this.lista3 = new double[4];
      }
     
+    /**
+     *
+     * @return
+     */
     public double[] getListaRegresiva(){
         return this.lista1; 
     }
     
+    /**
+     *
+     * @return
+     */
     public double[] getListaCentrada(){
         return this.lista2;
     }
     
+    /**
+     *
+     * @return
+     */
     public double[] getListaProgresiva(){
         return this.lista3;
     }
     
+    /**
+     *
+     * @param x
+     * @return
+     */
     @Override
     public double calcularDerivadaEn(double x){
         

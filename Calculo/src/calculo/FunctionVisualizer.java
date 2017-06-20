@@ -9,11 +9,6 @@ package calculo;
  *
  * @author Mauricio Castillo
  */
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,6 +17,10 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.mariuszgromada.math.mxparser.Function;
 
+/**
+ *
+ * @author Mauricio Castillo
+ */
 public class FunctionVisualizer{//extends JFrame
     // define X range
     private int minX=-10;
@@ -32,6 +31,12 @@ public class FunctionVisualizer{//extends JFrame
     private XYSeriesCollection dataset;
     private JFreeChart chart;
 
+    /**
+     *
+     * @param funcion
+     * @param valorA
+     * @param valorB
+     */
     public FunctionVisualizer(Function funcion,double valorA, double valorB){
         this.funcion = funcion;
         this.valorA = valorA;
@@ -41,6 +46,11 @@ public class FunctionVisualizer{//extends JFrame
         dataSetIntegral();
     }
     
+    /**
+     *
+     * @param funcion
+     * @param valorX
+     */
     public FunctionVisualizer(Function funcion,double valorX){
         this.funcion = funcion;
         this.valorX = valorX;
@@ -95,6 +105,10 @@ public class FunctionVisualizer{//extends JFrame
         }
     }
     
+    /**
+     *
+     * @return panel
+     */
     public ChartPanel creacionGrafico(){
         // Generate the graph
         chart = ChartFactory.createXYLineChart(
@@ -110,12 +124,5 @@ public class FunctionVisualizer{//extends JFrame
 
         ChartPanel panel = new ChartPanel(chart);
         return panel;
-    
-//        getContentPane().setLayout(new FlowLayout());
-//        getContentPane().add(panel);
-//
-//        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//        pack();
-//        setVisible(true);
     }
 }

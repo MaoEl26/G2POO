@@ -280,6 +280,9 @@ public class IntegralGUI extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_graficarActionPerformed
 
+    /**
+     *
+     */
     public void setStateButtons(){
         calculoIntegralSimpson.setEnabled(true);
         calculoIntegralTrapecio.setEnabled(true);

@@ -7,7 +7,6 @@ package calculo;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
-import org.jfree.chart.ChartPanel;
 import org.mariuszgromada.math.mxparser.Function;
 
 /**
@@ -27,9 +26,14 @@ public class GraficoGUI extends javax.swing.JFrame {
     private double valorA,valorB,valorX;
     
     private Double resultado;
-    private ChartPanel panel;
     private int indicadorMetodo;
     
+    /**
+     *
+     * @param ventanaPrincipal
+     * @param funcion
+     * @param indicadorMetodo
+     */
     public GraficoGUI(InitGUI ventanaPrincipal, Function funcion,
             int indicadorMetodo) {
         initComponents();
@@ -42,10 +46,21 @@ public class GraficoGUI extends javax.swing.JFrame {
         this.indicadorMetodo = indicadorMetodo;
     }
     
+    /**
+     *
+     * @param gui
+     */
     public void setVentana(IntegralGUI gui){
         this.integral = gui;
     }
     
+    /**
+     *
+     * @param valorA
+     * @param valorB
+     * @param resultado
+     * @param metodo
+     */
     public void setIntegralValues(double valorA, double valorB,
             double resultado, String metodo){
         this.valorA = valorA;
@@ -54,12 +69,21 @@ public class GraficoGUI extends javax.swing.JFrame {
         this.metodo = metodo;
     }
     
+    /**
+     *
+     * @param valorX
+     * @param resultado
+     * @param metodo
+     */
     public void setLimitValues(double valorX,Double resultado,String metodo){
         this.valorX = valorX;
         this.resultado = resultado;
         this.metodo = metodo;
     }
     
+    /**
+     *
+     */
     public void setGrafica(){
         panelGrafico.setLayout(new java.awt.BorderLayout());
         

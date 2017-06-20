@@ -20,6 +20,9 @@ public class InitGUI extends javax.swing.JFrame {
     private String funcionString;
     private Function funcionInicial;
     
+    /**
+     *
+     */
     public InitGUI() {
         initComponents();
         this.setTitle("Cálculo por Métodos Numéricos");
@@ -163,6 +166,12 @@ public class InitGUI extends javax.swing.JFrame {
         derivadaBoton.setEnabled(true);
         integralBoton.setEnabled(true);
 }
+
+    /**
+     *
+     * @param texto
+     * @return
+     */
     public boolean checkValue(String texto){
         try{
             Double.parseDouble(texto);

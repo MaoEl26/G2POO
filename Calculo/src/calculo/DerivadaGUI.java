@@ -24,6 +24,11 @@ public class DerivadaGUI extends javax.swing.JFrame {
     private Double variableX = null;
     private final int indicadorMetodo = 2;
     
+    /**
+     *
+     * @param ventanaPrincipal
+     * @param funcion
+     */
     public DerivadaGUI(InitGUI ventanaPrincipal,Function funcion) {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;

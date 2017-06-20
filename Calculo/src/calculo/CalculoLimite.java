@@ -10,5 +10,11 @@ package calculo;
  * @author Mauricio Castillo
  */
 public interface CalculoLimite {
+
+    /**
+     *
+     * @param x
+     * @return
+     */
     public Double LimiteEn(double x);
 }

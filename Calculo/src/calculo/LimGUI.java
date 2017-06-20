@@ -24,6 +24,11 @@ public class LimGUI extends javax.swing.JFrame {
     private Double variableX = null,resultado;
     private final int indicadorMetodo = 1;
     
+    /**
+     *
+     * @param ventanaPrincipal
+     * @param funcion
+     */
     public LimGUI(InitGUI ventanaPrincipal, Function funcion) {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
