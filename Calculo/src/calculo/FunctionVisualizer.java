@@ -9,6 +9,7 @@ package calculo;
  *
  * @author Mauricio Castillo
  */
+import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -27,6 +28,7 @@ public class FunctionVisualizer{//extends JFrame
     private int maxX=10;
     private XYSeries serieFuncion,lineaValorA,lineaValorB;
     private XYSeries serie0,serie1,serie2,serie3,serie4;
+    private ArrayList<XYSeries> listaseries;
     private Function funcion;
     private double valorA,valorB,valorX ;
     private XYSeriesCollection dataset;
@@ -65,10 +67,19 @@ public class FunctionVisualizer{//extends JFrame
         this.funcion = pFuncion;                    // Función dada por el usuario.
         this.puntosCentrales = pPuntosCentrales;    // Arreglo de puntos.
         SerieFuncion();                             // Grafica la función. 
+        creaLista();
         SeriesDerivada();
         dataSetDerivate();
     }
     
+    private void creaLista(){
+        listaseries = new ArrayList<>();
+        listaseries.add(serie0 = new XYSeries("Valor 1"));
+        listaseries.add(serie1 = new XYSeries("Valor 2"));
+        listaseries.add(serie2 = new XYSeries("Valor X"));
+        listaseries.add(serie3 = new XYSeries("Valor 3"));
+        listaseries.add(serie4 = new XYSeries("Valor 4"));
+    }
     
     private void dataSetIntegral(){
         dataset = new XYSeriesCollection();
@@ -98,30 +109,9 @@ public class FunctionVisualizer{//extends JFrame
             double resultadoFuncion = funcion.calculate(valorA);
             for (double i = 0; i < resultadoFuncion ; i=i+0.5)
             {
-                serie0.add(1,2);
+                listaseries.get(x).add(1,2);
             }
         }
-        double resultadoFuncion = funcion.calculate(valorA);
-        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
-        {
-            serie1.add(1,2);
-        }
-        resultadoFuncion = funcion.calculate(valorA);
-        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
-        {
-            serie2.add(1,2);
-        }
-        resultadoFuncion = funcion.calculate(valorA);
-        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
-        {
-            serie3.add(1,2);
-        }
-        resultadoFuncion = funcion.calculate(valorA);
-        for (double i = 0; i < resultadoFuncion ; i=i+0.5)
-        {
-            serie4.add(1,2);
-        }
-        
     }
     
     private void SerieValorX(){
