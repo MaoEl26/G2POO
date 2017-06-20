@@ -23,6 +23,7 @@ public class IntegralGUI extends javax.swing.JFrame {
     private Function funcion;
     private Double variableA = null,variableB = null,resultadoOperacion;
     private Integer intervalos = null;
+    private final int indicadorMetodo = 3;
     
     /**
      *
@@ -269,7 +270,8 @@ public class IntegralGUI extends javax.swing.JFrame {
 
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
         // TODO add your handling code here:
-        GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,3);
+        GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
+                indicadorMetodo);
         graficoGUI.setIntegralValues(variableA, variableB, 
                 resultadoOperacion, metodoUsado);
         graficoGUI.setGrafica();

@@ -10,6 +10,7 @@ package calculo;
  * @author Mauricio Castillo
  */
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -25,11 +26,9 @@ public class FunctionVisualizer{//extends JFrame
     // define X range
     private int minX=-10;
     private int maxX=10;
-    private XYSeries serieFuncion;
-    private XYSeries lineaValorA;
-    private XYSeries lineaValorB;
+    private XYSeries serieFuncion,lineaValorA,lineaValorB;
     private Function funcion;
-    private double valorA,valorB;
+    private double valorA,valorB,valorX ;
     private XYSeriesCollection dataset;
     private JFreeChart chart;
 
@@ -42,11 +41,33 @@ public class FunctionVisualizer{//extends JFrame
         dataSetIntegral();
     }
     
+    public FunctionVisualizer(Function funcion,double valorX){
+        this.funcion = funcion;
+        this.valorX = valorX;
+        SerieFuncion();
+        SerieValorX();
+        dataSetLimit();
+    }
+    
     private void dataSetIntegral(){
         dataset = new XYSeriesCollection();
         dataset.addSeries(serieFuncion);
         dataset.addSeries(lineaValorA);
         dataset.addSeries(lineaValorB);
+    }
+    
+    private void dataSetLimit(){
+        dataset = new XYSeriesCollection();
+        dataset.addSeries(serieFuncion);
+        dataset.addSeries(lineaValorA);
+    }
+    
+    private void SerieValorX(){
+        lineaValorA = new XYSeries("Valor X");
+        for (double i = minX; i < maxX; i=i+0.5)
+        {
+            lineaValorA.add(valorX,i);
+        }
     }
     
     private void SerieFuncion(){

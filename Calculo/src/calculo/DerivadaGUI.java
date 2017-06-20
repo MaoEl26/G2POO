@@ -22,6 +22,7 @@ public class DerivadaGUI extends javax.swing.JFrame {
     private String funcionString;
     private Function funcion;
     private Double variableX = null;
+    private final int indicadorMetodo = 2;
     
     public DerivadaGUI(InitGUI ventanaPrincipal,Function funcion) {
         initComponents();
@@ -29,6 +30,7 @@ public class DerivadaGUI extends javax.swing.JFrame {
         this.funcion = funcion;
         this.funcionString = funcion.getFunctionExpressionString();
         función.setText("Función = "+funcionString);
+        graficar.setEnabled(false);
         this.setTitle(ventanaPrincipal.getTitle());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -59,6 +61,11 @@ public class DerivadaGUI extends javax.swing.JFrame {
 
         graficar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         graficar.setText("Graficar");
+        graficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficarActionPerformed(evt);
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Poor Richard", 2, 24)); // NOI18N
         titulo.setText("Cálculo de la Derivada");
@@ -138,7 +145,8 @@ public class DerivadaGUI extends javax.swing.JFrame {
     private void calculoDerivadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoDerivadaActionPerformed
         // TODO add your handling code here:
         if (ventanaPrincipal.checkValue(valorX.getText())){
-            variableX = Double.parseDouble(valorX.getText());    
+            variableX = Double.parseDouble(valorX.getText());
+            graficar.setEnabled(true);
         }else
         {
             JOptionPane.showMessageDialog(null,"El valor X no es un número o "
@@ -146,6 +154,13 @@ public class DerivadaGUI extends javax.swing.JFrame {
                     "Variable Incompatible",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_calculoDerivadaActionPerformed
+
+    private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
+                indicadorMetodo);
+        ///Metodo que setee los valores a utilizar
+        graficoGUI.setGrafica();//muestra la grafica
+    }//GEN-LAST:event_graficarActionPerformed
 
     /**
      * @param args the command line arguments

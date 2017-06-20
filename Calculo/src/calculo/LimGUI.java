@@ -19,9 +19,10 @@ public class LimGUI extends javax.swing.JFrame {
      * Creates new form LimGUI
      */
     private InitGUI ventanaPrincipal;
-    private String funcionString;
+    private String funcionString,metodoUsado;
     private Function funcion;
-    private Double variableX = null;
+    private Double variableX = null,resultado;
+    private final int indicadorMetodo = 1;
     
     public LimGUI(InitGUI ventanaPrincipal, Function funcion) {
         initComponents();
@@ -31,6 +32,7 @@ public class LimGUI extends javax.swing.JFrame {
         función.setText("Función = "+funcionString);
         this.setTitle(ventanaPrincipal.getTitle());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        graficar.setEnabled(false);
     }
 
     /**
@@ -82,6 +84,11 @@ public class LimGUI extends javax.swing.JFrame {
 
         graficar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         graficar.setText("Graficar");
+        graficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +144,7 @@ public class LimGUI extends javax.swing.JFrame {
         if (ventanaPrincipal.checkValue(valorX.getText())){
             variableX = Double.parseDouble(valorX.getText());    
             flag = true;
+            graficar.setEnabled(true);
         }else
         {
             JOptionPane.showMessageDialog(null,"El valor X no es un número o "
@@ -145,7 +153,8 @@ public class LimGUI extends javax.swing.JFrame {
         }
         if (flag){
             MetodoAproximacion metodo = new MetodoAproximacion(funcion);
-            System.out.println(metodo.LimiteEn(variableX));
+            resultado = metodo.LimiteEn(variableX);
+            metodoUsado = "Aproxicimación";
         }
         
     }//GEN-LAST:event_calculoLimiteActionPerformed
@@ -154,6 +163,15 @@ public class LimGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         ventanaPrincipal.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
+                indicadorMetodo);
+        graficoGUI.setLimitValues(variableX, resultado, metodoUsado);
+        graficoGUI.setGrafica();
+        graficoGUI.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_graficarActionPerformed
 
     /**
      * @param args the command line arguments

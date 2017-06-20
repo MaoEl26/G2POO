@@ -36,8 +36,7 @@ public class MetodoAproximacion implements CalculoLimite{
         }
         return null;
     }
-    //(x^2 -1 )/(x+1) -1
-    //(x-2)/(x^2-x-2) 2
+
     public ArrayList<Double> getTendenciaSuperior(){
         return tendenciaSuperior;
     }

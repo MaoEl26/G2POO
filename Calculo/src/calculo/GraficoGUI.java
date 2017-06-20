@@ -24,7 +24,8 @@ public class GraficoGUI extends javax.swing.JFrame {
     private String funcionString, metodo;
     private Function funcion;
     private FunctionVisualizer visualizador;
-    private double valorA,valorB;
+    private double valorA,valorB,valorX;
+    
     private Double resultado;
     private ChartPanel panel;
     private int indicadorMetodo;
@@ -53,23 +54,34 @@ public class GraficoGUI extends javax.swing.JFrame {
         this.metodo = metodo;
     }
     
+    public void setLimitValues(double valorX,Double resultado,String metodo){
+        this.valorX = valorX;
+        this.resultado = resultado;
+        this.metodo = metodo;
+    }
+    
     public void setGrafica(){
+        panelGrafico.setLayout(new java.awt.BorderLayout());
+        
         if(indicadorMetodo == 1){
-            
+            visualizador = new FunctionVisualizer(funcion, valorX);
+            if (resultado == null){
+                respuestaSalida.setText("infinito");
+            }else{
+                respuestaSalida.setText(resultado.toString());
+            }
         }
         if(indicadorMetodo == 2){
             
         }
         if(indicadorMetodo == 3){
-            panelGrafico.setLayout(new java.awt.BorderLayout());
             visualizador = new FunctionVisualizer(funcion, valorA, valorB);
-            panelGrafico.removeAll();
-            panelGrafico.add(visualizador.creacionGrafico(),BorderLayout.CENTER);
-            panelGrafico.validate();
-            mensajeLabel.setText("El resultado del método: "+metodo+" es");
             respuestaSalida.setText(resultado.toString());
         }
-        
+        panelGrafico.removeAll();
+        panelGrafico.add(visualizador.creacionGrafico(),BorderLayout.CENTER);
+        panelGrafico.validate();
+        mensajeLabel.setText("El resultado del método: "+metodo+" es:");
     }
     
 
@@ -103,7 +115,7 @@ public class GraficoGUI extends javax.swing.JFrame {
         panelGrafico.setLayout(panelGraficoLayout);
         panelGraficoLayout.setHorizontalGroup(
             panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
         );
         panelGraficoLayout.setVerticalGroup(
             panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +158,7 @@ public class GraficoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(funcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()

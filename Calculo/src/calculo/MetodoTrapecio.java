@@ -38,8 +38,6 @@ public class MetodoTrapecio implements CalculoIntegral{
         return resultado*valorH;
     }
     
-    //(x^3)-(5*x^2)+2*x+15
-    
     private void calcularValorH(){
         valorH = (valorB-valorA)/valorN;
     }
