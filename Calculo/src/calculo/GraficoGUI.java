@@ -27,6 +27,7 @@ public class GraficoGUI extends javax.swing.JFrame {
     private double[] Puntos;                    // Puntos de la derivada.
     private Double resultado;
     private int indicadorMetodo;
+    private int metodoIntegral = 3,metodoDerivada = 2,metodoLimite = 1;
     
     /**
      *
@@ -51,6 +52,7 @@ public class GraficoGUI extends javax.swing.JFrame {
      * @param gui
      */
     public void setVentana(IntegralGUI gui){
+        //Defina una variable para cuando el metodo usado es una integral
         this.integral = gui;
     }
     
@@ -63,6 +65,10 @@ public class GraficoGUI extends javax.swing.JFrame {
      */
     public void setIntegralValues(double valorA, double valorB,
             double resultado, String metodo){
+        /*
+        Define los valores necesarios para calcular la funcion de una integral 
+        y así poder graficarla
+        */
         this.valorA = valorA;
         this.valorB = valorB;
         this.resultado = resultado;
@@ -76,24 +82,38 @@ public class GraficoGUI extends javax.swing.JFrame {
      * @param metodo
      */
     public void setLimitValues(double valorX,Double resultado,String metodo){
+        /*
+        Define los valores que se necesitan para calcular un limete y graficarlo
+        */
         this.valorX = valorX;
         this.resultado = resultado;
         this.metodo = metodo;
     }
     
     public void setDerivateValues(double pValorX, double[] pPuntos, String pMetodo){
-        this.valorX = pValorX;  // Valor donde se evalúa.
-        this.Puntos = pPuntos;  // Los puntos de la gráfica.
-        this.metodo = pMetodo;  // Método utilizado.
-        
+        /*
+        Define los valores necesarios para el calculo de una derivada y graficarla
+        */
+        this.valorX    = pValorX;  // Valor donde se evalúa.
+        this.Puntos    = pPuntos;  // Los puntos de la gráfica.
+        this.metodo    = pMetodo;  // Método utilizado.
+        this.resultado = Puntos[2];
     }
+    
     /**
      *
      */
     public void setGrafica(){
+        /*
+        Inserta la gráfica en el panel
+        Sus valores de aparariencia dependeran del método númerico ingresado
+        ya que sus valores necesarios para graficar son distintos
+        Los valores del resultado dependerán del método númerico
+        */
+        
         panelGrafico.setLayout(new java.awt.BorderLayout());
         
-        if(indicadorMetodo == 1){
+        if(indicadorMetodo == metodoLimite){
             visualizador = new FunctionVisualizer(funcion, valorX);
             if (resultado == null){
                 respuestaSalida.setText("infinito");
@@ -101,11 +121,11 @@ public class GraficoGUI extends javax.swing.JFrame {
                 respuestaSalida.setText(resultado.toString());
             }
         }
-        if(indicadorMetodo == 2){
-            visualizador = new FunctionVisualizer(funcion, Puntos);
+        if(indicadorMetodo == metodoDerivada){
+            visualizador = new FunctionVisualizer(funcion, Puntos, valorX);
             respuestaSalida.setText(resultado.toString());
         }
-        if(indicadorMetodo == 3){
+        if(indicadorMetodo == metodoIntegral){
             visualizador = new FunctionVisualizer(funcion, valorA, valorB);
             respuestaSalida.setText(resultado.toString());
         }
@@ -226,8 +246,12 @@ public class GraficoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-        if(indicadorMetodo == 3){
+        /*
+        Cierra la ventana de graficar y si el metodo es una integral
+        reactica la pantalla de la integral para calcular de nuevo con otro tipo
+        de función 
+        */
+        if(indicadorMetodo == metodoIntegral){
             integral.setEnabled(true);
             integral.setVisible(true);
             integral.setStateButtons();
@@ -237,8 +261,12 @@ public class GraficoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void menuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPrincipalActionPerformed
-        
-        if(indicadorMetodo == 3){
+        /*
+        Envía el programa a la ventana inicial para el calculo de otra función 
+        u otro procedimiento
+        */
+        if(indicadorMetodo == metodoIntegral){
+            //Cierra la ventana de la integral
             integral.setVisible(false);
         }
         ventanaPrincipal.setVisible(true);
@@ -246,7 +274,7 @@ public class GraficoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPrincipalActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
+        // Cierra el programa
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 

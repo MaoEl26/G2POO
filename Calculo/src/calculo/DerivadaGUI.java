@@ -146,16 +146,21 @@ public class DerivadaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void valorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorXActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_valorXActionPerformed
 
     private void calculoDerivadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoDerivadaActionPerformed
-        // TODO add your handling code here:
+        /* 
+        Revisa que el valor ingresado sea un número, si no lo es despliega un 
+        mensaje indicandolo y no deja continuar
+        Si el valor es correcto realiza las llamadas necesarias para el calculo
+        de los valores necesarios 
+        */
         if (ventanaPrincipal.checkValue(valorX.getText())){
             variableX = Double.parseDouble(valorX.getText());
-            MetodoDiferenciasCentrales Auxiliar = new MetodoDiferenciasCentrales(funcion, variableX);
-            Auxiliar.calcularDerivadaEn(variableX);
-            listaValoresX = Auxiliar.getListaCentrada();
+            MetodoDiferenciasCentrales metodo = new MetodoDiferenciasCentrales(funcion);
+            metodo.calcularDerivadaEn(variableX);
+            listaValoresX = metodo.getListaCentrada();
             resultado = listaValoresX[2];
             graficar.setEnabled(true);
         }else
@@ -167,10 +172,17 @@ public class DerivadaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_calculoDerivadaActionPerformed
 
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
+        /*
+        Crea la ventana de graficar y la muestra en pantalla
+        Además deshabilita las demás ventanas muestra la grafica y resultado en 
+        pantalla
+        */
         GraficoGUI graficoGUI = new GraficoGUI(ventanaPrincipal,funcion,
                 indicadorMetodo);
-        ///Metodo que setee los valores a utilizar
+        graficoGUI.setDerivateValues(variableX, listaValoresX, "Diferencias Centrales");
         graficoGUI.setGrafica();//muestra la grafica
+        graficoGUI.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_graficarActionPerformed
 
     /**

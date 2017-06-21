@@ -22,18 +22,22 @@ import org.mariuszgromada.math.mxparser.Function;
  *
  * @author Mauricio Castillo
  */
-public class FunctionVisualizer{//extends JFrame
-    // define X range
-    private int minX=-10;
-    private int maxX=10;
-    private XYSeries serieFuncion,lineaValorA,lineaValorB;
-    private XYSeries serie0,serie1,serie2,serie3,serie4;
-    private ArrayList<XYSeries> listaseries;
-    private Function funcion;
-    private double valorA,valorB,valorX ;
-    private XYSeriesCollection dataset;
-    private JFreeChart chart;
-    private double[] puntosCentrales;       // Arreglo con la derivada de los puntos.
+public class FunctionVisualizer{
+    
+    private int minX=-10;//Valores minimos para el ciclo de la funcion(eje x)
+    private int maxX=10;//Valores maximos para el calculo de la funcion(eje x)
+    private XYSeries serieFuncion,lineaValorA,lineaValorB; //Valores de los 
+        //puntos X Y de la funcion y puntos de la integral e indeterminación 
+        //del limite
+    private XYSeries serie0,serie1,serie2,serie3,serie4; // Puntos X Y para la 
+        //graficacion de los puntos centrales de la derivada
+    private ArrayList<XYSeries> listaseries; //Lista de puntos para la derivada
+    private Function funcion; //Funcion matematica ingresada
+    private double valorA,valorB,valorX ; //valores de los puntos a graficar
+    private XYSeriesCollection dataset; //Conjunto de puntos para mostrar en la 
+                                        //grafica
+    private JFreeChart chart; //Conjunto de puntos graficados
+    private double[] puntosCentrales;// Arreglo con la derivada de los puntos.
     /**
      *
      * @param funcion
@@ -41,6 +45,7 @@ public class FunctionVisualizer{//extends JFrame
      * @param valorB
      */
     public FunctionVisualizer(Function funcion,double valorA, double valorB){
+        //Constructor para el calculo de la integral en la  gráfica
         this.funcion = funcion;
         this.valorA = valorA;
         this.valorB = valorB;
@@ -55,6 +60,7 @@ public class FunctionVisualizer{//extends JFrame
      * @param valorX
      */
     public FunctionVisualizer(Function funcion,double valorX){
+        //Constructor para la graficación del limite
         this.funcion = funcion;
         this.valorX = valorX;
         SerieFuncion();
@@ -63,13 +69,23 @@ public class FunctionVisualizer{//extends JFrame
     }
     
         // Constructor para el método de Diferencias Centrales.
-    public FunctionVisualizer(Function pFuncion, double[] pPuntosCentrales){
+
+    /**
+     *
+     * @param pFuncion
+     * @param pPuntosCentrales
+     * @param pValorX
+     */
+public FunctionVisualizer(Function pFuncion, double[] pPuntosCentrales, 
+            double pValorX){
         this.funcion = pFuncion;                    // Función dada por el usuario.
         this.puntosCentrales = pPuntosCentrales;    // Arreglo de puntos.
+        this.valorX = pValorX;
         SerieFuncion();                             // Grafica la función. 
         creaLista();
         SeriesDerivada();
         dataSetDerivate();
+        
     }
     
     private void creaLista(){
@@ -105,12 +121,15 @@ public class FunctionVisualizer{//extends JFrame
     }
     
     private void SeriesDerivada(){
+        // Dos puntos hacia atrás.
+        valorX = valorX - (2 * 0.1);
         for(int x = 0;x<5;x++){
-            double resultadoFuncion = funcion.calculate(valorA);
-            for (double i = 0; i < resultadoFuncion ; i=i+0.5)
+            double resultadoFuncion = puntosCentrales[x];
+            for (double i = 0; i <= resultadoFuncion ; i=i+0.5)
             {
-                listaseries.get(x).add(1,2);
+                listaseries.get(x).add(valorX, i);
             }
+            valorX = valorX + 0.1;     
         }
     }
     
